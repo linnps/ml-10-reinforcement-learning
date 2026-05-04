@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+.env
+
+# Replay buffers, checkpoints, training logs
+replay_buffer/
+checkpoints/
+*.pt
+*.pth
+mlruns/
+wandb/
+runs/
+
+# Recorded videos / GIFs of agent behaviour (large)
+videos/
+*.mp4
+*.gif
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Journals (per ~/.claude/CLAUDE.md — never commit raw command output)
+journal-*.md
+
+# Secrets
+.env.local
+*.key
+secrets.json
+
+# But DO commit dashboard figures and final metrics — they're the showcase.
+!assets/
+!assets/*.png
+!results/
+!results/metrics.json
