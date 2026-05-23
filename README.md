@@ -14,6 +14,10 @@
 
 ---
 
+<p align="center">
+  <a href="https://linnps.github.io/ml-10-reinforcement-learning/"><img src="https://img.shields.io/badge/View_Live_Dashboard-0E2841?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="View live dashboard"></a>
+</p>
+
 ## At a glance
 
 > A 6×6 Gridworld coded from scratch (no Gymnasium, no third-party env). Pits to avoid, a goal to reach, a tiny step penalty to discourage wandering. A Deep Q-Network — replay buffer, target network, ε-greedy schedule — learns a near-optimal policy in 250 episodes on CPU.
