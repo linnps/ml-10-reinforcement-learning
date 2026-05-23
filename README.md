@@ -18,31 +18,12 @@
 
 > A 6×6 Gridworld coded from scratch (no Gymnasium, no third-party env). Pits to avoid, a goal to reach, a tiny step penalty to discourage wandering. A Deep Q-Network — replay buffer, target network, ε-greedy schedule — learns a near-optimal policy in 250 episodes on CPU.
 
-<table>
-<tr>
-<td align="center" width="33%">
-<sub>Final 25-ep mean reward</sub><br>
-<b style="font-size:1.6em; color:#3B6EA8;">+0.91</b><br>
-<sub>(optimal ≈ +0.90 with step penalty)</sub>
-</td>
-<td align="center" width="33%">
-<sub>Random baseline</sub><br>
-<b style="font-size:1.6em; color:#C04040;">−1.11</b><br>
-<sub>most random walks fall in a pit</sub>
-</td>
-<td align="center" width="33%">
-<sub>Final episode length</sub><br>
-<b style="font-size:1.6em; color:#3B6EA8;">10.3</b><br>
-<sub>steps (Manhattan optimum = 10)</sub>
-</td>
-</tr>
-</table>
-
-| Metric | DQN (final 25 ep) | Random baseline | Optimal |
-|---|---:|---:|---:|
-| Mean episode reward | **+0.91** | −1.11 | ≈ +0.90 |
-| Mean episode length (steps to terminate) | **10.3** | ~30 | 10 |
-| Pit-fall rate | ~0% | ~70% | 0% |
+<p align="center">
+  <img src="https://img.shields.io/badge/Final_mean_reward-0.907-3B6EA8?style=for-the-badge" alt="Final mean reward 0.907">
+  <img src="https://img.shields.io/badge/Theoretical_optimum_(G%2A)-0.91-7A7A7A?style=for-the-badge" alt="Theoretical optimum G* 0.91">
+  <img src="https://img.shields.io/badge/Random_baseline---1.106-C04040?style=for-the-badge" alt="Random baseline -1.106">
+</p>
+<p align="center"><sub>Final mean reward &rarr; <b>DQN</b> (final 25 episodes, live &epsilon; = 0.05)&nbsp;&middot;&nbsp;G* = 1.0 + 9&times;(&minus;0.01) derived from env constants&nbsp;&middot;&nbsp;baseline = 50-episode uniform-random policy</sub></p>
 
 <sub>**Headline finding:** the trained DQN is essentially **at the theoretical optimum**. Manhattan distance from start (0,0) to goal (5,5) is 10 steps — the agent's average of 10.3 means it takes a 10-step path on most episodes, with occasional 11-step detours around the pit-cluster. The reward curve shows a clean transition from random behavior (~episode 0–50) through exploration-driven learning (~50–150) to convergence (~150+).</sub>
 
@@ -105,6 +86,32 @@ A two-hidden-layer MLP with 64 units per layer, outputting one Q-value per actio
 ---
 
 ## Dashboard
+
+### Policy scorecard
+
+<table>
+<tr><th align="left">Policy</th><th>Mean reward</th><th>Mean steps&#8209;to&#8209;goal</th><th>vs G*</th></tr>
+<tr>
+  <td><b>Trained DQN</b></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.907-3B6EA8?style=flat-square" alt="0.907"></td>
+  <td align="center"><img src="https://img.shields.io/badge/10.28-3B6EA8?style=flat-square" alt="10.28"></td>
+  <td align="center">99.7%25 of G*</td>
+</tr>
+<tr>
+  <td><b>Random baseline</b></td>
+  <td align="center"><img src="https://img.shields.io/badge/--1.106-C04040?style=flat-square" alt="-1.106"></td>
+  <td align="center">—</td>
+  <td align="center">far below</td>
+</tr>
+<tr>
+  <td><b>Theoretical optimum</b></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.91-7A7A7A?style=flat-square" alt="0.91"></td>
+  <td align="center"><img src="https://img.shields.io/badge/10-7A7A7A?style=flat-square" alt="10"></td>
+  <td align="center">—</td>
+</tr>
+</table>
+
+<sub>Reward is collected during training with live &epsilon; (final 25 episodes at &epsilon; = 0.05) — slightly pessimistic vs. a greedy evaluation pass. G* = 1.0 + 9&times;(&minus;0.01) = 0.91 is derived from env constants (goal\_reward, step\_penalty, Manhattan-optimal path length), not from metrics.json. Trained-DQN values from `results/metrics.json`.</sub>
 
 ### 1. The environment
 
